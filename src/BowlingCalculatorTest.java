@@ -15,7 +15,6 @@ public class BowlingCalculatorTest {
 
         assertEquals(15, calculator.calculate());
     }
-
     @Test
     public void calculate_spare() {
         calculator.addRoll(6);
@@ -36,21 +35,21 @@ public class BowlingCalculatorTest {
     }
 
     @Test
-    public void calculate_strike300() {
-        calculator.addRoll(10);
-        calculator.addRoll(10);
-        calculator.addRoll(10);
-        calculator.addRoll(10);
-        calculator.addRoll(10);
-        calculator.addRoll(10);
-        calculator.addRoll(10);
-        calculator.addRoll(10);
-        calculator.addRoll(10);
-        calculator.addRoll(10);
-        calculator.addRoll(10);
-        calculator.addRoll(10);
+    public void calculate_strikesWithBonusRolls() {
+        for (int i = 0; i < 12; i++) {
+            calculator.addRoll(10);
+        }
 
         assertEquals(300, calculator.calculate());
+    }
+
+    @Test
+    public void calculate_strikesWithoutBonusRolls() {
+        for (int i = 0; i < 10; i++) {
+            calculator.addRoll(10);
+        }
+
+        assertEquals(270, calculator.calculate());
     }
 
 }

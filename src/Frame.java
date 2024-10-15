@@ -10,6 +10,10 @@ public class Frame {
         return roll1 == 10 || roll2 == 10;
     }
 
+    public boolean isStrikeInFirstRoll() {
+        return roll1 == 10;
+    }
+
     public boolean isSpare() {
         return getFrameSum() == 10 && !isStrike();
     }
@@ -20,14 +24,6 @@ public class Frame {
 
     public int getRoll1() {
         return roll1;
-    }
-
-    public int getRoll2() {
-        return roll2;
-    }
-
-    public void setRoll1(int roll1) {
-        this.roll1 = roll1;
     }
 
     public void setRoll2(int roll2) {
