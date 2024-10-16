@@ -24,23 +24,15 @@ public class BowlingCalculator {
         return result;
     }
 
-    public void print() {
-        System.out.println(getDisplayableResults());
+    public void printResults() {
+        System.out.println(getDisplayableFrameResults());
         System.out.println(getDisplayableScores());
     }
 
-    String getDisplayableResults() {
-        StringBuilder result = new StringBuilder("|");
-        for (Frame frame : frames) {
-            if (frame.isStrike()) {
-                result.append(" X - |");
-            } else if (frame.isSpare()) {
-                result.append(" %s / |".formatted(frame.getRoll1()));
-            } else {
-                result.append(" %s %s |".formatted(frame.getRoll1(), frame.getRoll2()));
-            }
-        }
-        return result.toString();
+    String getDisplayableFrameResults() {
+        return frames.stream()
+                .reduce(new StringBuilder("|"), StringBuilder::append, StringBuilder::append)
+                .toString();
     }
 
     String getDisplayableScores() {

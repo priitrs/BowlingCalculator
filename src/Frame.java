@@ -41,4 +41,11 @@ public class Frame {
     public void setRoll2(int roll2) {
         this.roll2 = roll2;
     }
+
+    @Override
+    public String toString() {
+        if (isStrike()) return " X - |";
+        if (isSpare()) return " %s / |".formatted(getRoll1());
+        return " %s %s |".formatted(getRoll1(), getRoll2());
+    }
 }

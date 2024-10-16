@@ -81,7 +81,7 @@ public class BowlingCalculatorTest {
     }
 
     @Test
-    public void getDisplayableResults() {
+    public void getDisplayableFrameResults() {
         calculator.addRoll(3);
         calculator.addRoll(4);
         calculator.addRoll(10);
@@ -100,32 +100,32 @@ public class BowlingCalculatorTest {
         calculator.addRoll(4);
         calculator.addRoll(5);
 
-        assertEquals("| 3 4 | X - | 3 1 | 3 / | 3 4 | 0 / | X - | X - | 1 2 | 4 5 |", calculator.getDisplayableResults());
+        assertEquals("| 3 4 | X - | 3 1 | 3 / | 3 4 | 0 / | X - | X - | 1 2 | 4 5 |", calculator.getDisplayableFrameResults());
         calculator.calculateScore();
-        calculator.print();
+        calculator.printResults();
     }
 
     @Test
-    public void getDisplayableResults_normalRolls() {
+    public void getDisplayableFrameResults_normalRolls() {
         calculator.addRoll(3);
         calculator.addRoll(4);
 
-        assertEquals("| 3 4 |", calculator.getDisplayableResults());
+        assertEquals("| 3 4 |", calculator.getDisplayableFrameResults());
     }
 
     @Test
-    public void getDisplayableResults_spare() {
+    public void getDisplayableFrameResults_spare() {
         calculator.addRoll(3);
         calculator.addRoll(7);
 
-        assertEquals("| 3 / |", calculator.getDisplayableResults());
+        assertEquals("| 3 / |", calculator.getDisplayableFrameResults());
     }
 
     @Test
-    public void getDisplayableResults_strikeWithFirstRoll() {
+    public void getDisplayableFrameResults_strikeWithFirstRoll() {
         calculator.addRoll(10);
 
-        assertEquals("| X - |", calculator.getDisplayableResults());
+        assertEquals("| X - |", calculator.getDisplayableFrameResults());
     }
 
 }
