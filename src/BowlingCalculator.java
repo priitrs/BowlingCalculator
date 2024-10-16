@@ -78,7 +78,7 @@ public class BowlingCalculator {
     }
 
     private boolean isFirstRollInFrame() {
-        return frames.isEmpty() || frames.getLast().isStrike() || frames.getLast().getRoll2() >= 0;
+        return frames.isEmpty() || frames.getLast().isStrike() || frames.getLast().isFramePassed();
     }
 
     private int getSingleFrameScore(int i) {

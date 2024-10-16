@@ -30,6 +30,10 @@ public class Frame {
         return roll1 + roll2;
     }
 
+    public boolean isFramePassed() {
+        return roll2 >= 0;
+    }
+
     public int getRoll1() {
         return roll1;
     }
