@@ -28,17 +28,20 @@ public class BowlingCalculator {
         }
     }
 
-    public int calculate() {
+    public int calculateScore() {
         int result = 0;
         for (int i = 0; i < frames.size() && i <= 9; i++) {
-            result += frames.get(i).getFrameSum();
-            result += getBonusIfFrameIsSpare(i);
-            result += getBonusIfFrameIsStrike(i);
+            result += getSingleFrameScore(i);
         }
         return result;
     }
 
-    public String getDisplayableResults() {
+    public void print() {
+        System.out.println(getDisplayableResults());
+        System.out.println(getDisplayableScores());
+    }
+
+    String getDisplayableResults() {
         StringBuilder result = new StringBuilder("|");
         for (Frame frame : frames) {
             if (frame.isStrike()) {
@@ -49,6 +52,18 @@ public class BowlingCalculator {
                 result.append(" %s %s |".formatted(frame.getRoll1(), frame.getRoll2()));
             }
         }
+        return result.toString();
+    }
+
+    String getDisplayableScores() {
+        StringBuilder result = new StringBuilder("|");
+        for (int i = 0; i < frames.size(); i++) {
+            int singleFrameScore = getSingleFrameScore(i);
+            if (singleFrameScore < 10) result.append("  %s  |".formatted(singleFrameScore));
+            else if (singleFrameScore > 99) result.append(" %s |".formatted(singleFrameScore));
+            else result.append("  %s |".formatted(singleFrameScore));
+        }
+        result.append(" TOTAL: %s".formatted(calculateScore()));
         return result.toString();
     }
 
@@ -75,5 +90,9 @@ public class BowlingCalculator {
             }
         }
         return bonusFromStrike;
+    }
+
+    private int getSingleFrameScore(int i) {
+        return frames.get(i).getFrameSum() + getBonusIfFrameIsSpare(i) + getBonusIfFrameIsStrike(i);
     }
 }

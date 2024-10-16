@@ -7,49 +7,49 @@ public class BowlingCalculatorTest {
     BowlingCalculator calculator = new BowlingCalculator();
 
     @Test
-    public void calculate_standard() {
+    public void calculate_Score_standard() {
         calculator.addRoll(3);
         calculator.addRoll(4);
         calculator.addRoll(1);
         calculator.addRoll(7);
 
-        assertEquals(15, calculator.calculate());
+        assertEquals(15, calculator.calculateScore());
     }
     @Test
-    public void calculate_spare() {
+    public void calculate_Score_spare() {
         calculator.addRoll(6);
         calculator.addRoll(4);
         calculator.addRoll(1);
         calculator.addRoll(3);
 
-        assertEquals(15, calculator.calculate());
+        assertEquals(15, calculator.calculateScore());
     }
 
     @Test
-    public void calculate_strike() {
+    public void calculate_Score_strike() {
         calculator.addRoll(10);
         calculator.addRoll(1);
         calculator.addRoll(1);
 
-        assertEquals(14, calculator.calculate());
+        assertEquals(14, calculator.calculateScore());
     }
 
     @Test
-    public void calculate_strikesWithBonusRolls() {
+    public void calculate_Score_strikesWithBonusRolls() {
         for (int i = 0; i < 12; i++) {
             calculator.addRoll(10);
         }
 
-        assertEquals(300, calculator.calculate());
+        assertEquals(300, calculator.calculateScore());
     }
 
     @Test
-    public void calculate_strikesWithoutBonusRolls() {
+    public void calculate_Score_strikesWithoutBonusRolls() {
         for (int i = 0; i < 10; i++) {
             calculator.addRoll(10);
         }
 
-        assertEquals(270, calculator.calculate());
+        assertEquals(270, calculator.calculateScore());
     }
 
     @Test
@@ -101,6 +101,7 @@ public class BowlingCalculatorTest {
         calculator.addRoll(5);
 
         assertEquals("| 3 4 | X - | 3 1 | 3 / | 3 4 | 0 X | X - | X - | 1 2 | 4 5 |", calculator.getDisplayableResults());
+        calculator.print();
     }
 
     @Test
