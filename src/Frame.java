@@ -31,6 +31,10 @@ public class Frame {
         return roll1;
     }
 
+    public int getRoll2() {
+        return roll2;
+    }
+
     public void setRoll2(int roll2) {
         this.roll2 = roll2;
     }

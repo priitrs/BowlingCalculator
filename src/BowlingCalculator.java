@@ -38,6 +38,20 @@ public class BowlingCalculator {
         return result;
     }
 
+    public String getDisplayableResults() {
+        StringBuilder result = new StringBuilder("|");
+        for (Frame frame : frames) {
+            if (frame.isStrike()) {
+                result.append(frame.isStrikeInFirstRoll() ? " X - |" : " 0 X |");
+            } else if (frame.isSpare()) {
+                result.append(" %s / |".formatted(frame.getRoll1()));
+            } else {
+                result.append(" %s %s |".formatted(frame.getRoll1(), frame.getRoll2()));
+            }
+        }
+        return result.toString();
+    }
+
     int getBonusIfFrameIsSpare(int i) {
         boolean isNextFrame = i + 1 < frames.size();
         if (frames.get(i).isSpare() && isNextFrame) {
