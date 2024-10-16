@@ -4,27 +4,13 @@ import java.util.List;
 public class BowlingCalculator {
 
     private final List<Frame> frames = new ArrayList<>();
-    private boolean isFirstRollInFrame = true;
-    private int currentFrameIndex = 0;
 
     public void addRoll(int pins) {
-        if (isFirstRollInFrame) {
+        if (isFirstRollInFrame()) {
             Frame currentFrame = new Frame(pins);
             frames.add(currentFrame);
         } else {
-            frames.get(currentFrameIndex).setRoll2(pins);
-        }
-        updateParameters();
-    }
-
-    private void updateParameters() {
-        if (!isFirstRollInFrame) {
-            currentFrameIndex++;
-            isFirstRollInFrame = true;
-        } else if (frames.get(currentFrameIndex).isStrike()) {
-            currentFrameIndex++;
-        } else {
-            isFirstRollInFrame = false;
+            frames.getLast().setRoll2(pins);
         }
     }
 
@@ -88,8 +74,11 @@ public class BowlingCalculator {
                 Frame secondNextFrame = frames.get(i + 2);
                 bonusFromStrike += secondNextFrame.getRoll1();
             }
-        }
-        return bonusFromStrike;
+        }        return bonusFromStrike;
+    }
+
+    private boolean isFirstRollInFrame() {
+        return frames.isEmpty() || frames.getLast().isStrike() || frames.getLast().getRoll2() >= 0;
     }
 
     private int getSingleFrameScore(int i) {

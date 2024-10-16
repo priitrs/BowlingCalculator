@@ -72,7 +72,7 @@ public class BowlingCalculatorTest {
     }
 
     @Test
-    public void getBonusIfStrike_firstBonusRollIsFrameIsStrike() {
+    public void getBonusIfStrike_firstBonusRollIsStrike() {
         calculator.addRoll(10);
         calculator.addRoll(10);
         calculator.addRoll(10);

@@ -1,9 +1,12 @@
 public class Frame {
     private int roll1;
-    private int roll2;
+    private int roll2 = -1;
 
     public Frame(int roll1) {
         this.roll1 = roll1;
+        if (roll1 == 10) {
+            this.roll2 = 0;
+        }
     }
 
     public Frame(int roll1, int roll2) {
