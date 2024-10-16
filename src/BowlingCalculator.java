@@ -31,25 +31,35 @@ public class BowlingCalculator {
     public int calculate() {
         int result = 0;
         for (int i = 0; i < frames.size() && i <= 9; i++) {
-            Frame currentFrame = frames.get(i);
-            result += currentFrame.getFrameSum();
-
-            boolean isNextFrame = i + 1 < frames.size();
-            if (currentFrame.isSpare() && isNextFrame) {
-                Frame nextFrame = frames.get(i + 1);
-                result += nextFrame.getRoll1();
-            }
-            if (currentFrame.isStrike() && isNextFrame) {
-                Frame nextFrame = frames.get(i + 1);
-                result += nextFrame.getFrameSum();
-
-                boolean isSecondNextFrame = i + 2 < frames.size();
-                if (nextFrame.isStrikeInFirstRoll() && isSecondNextFrame) {
-                    Frame secondNextFrame = frames.get(i + 2);
-                    result += secondNextFrame.getRoll1();
-                }
-            }
+            result += frames.get(i).getFrameSum();
+            result += getBonusIfFrameIsSpare(i);
+            result += getBonusIfFrameIsStrike(i);
         }
         return result;
+    }
+
+    int getBonusIfFrameIsSpare(int i) {
+        boolean isNextFrame = i + 1 < frames.size();
+        if (frames.get(i).isSpare() && isNextFrame) {
+            Frame nextFrame = frames.get(i + 1);
+            return nextFrame.getRoll1();
+        }
+        return 0;
+    }
+
+    int getBonusIfFrameIsStrike(int i) {
+        boolean isNextFrame = i + 1 < frames.size();
+        int bonusFromStrike = 0;
+        if (frames.get(i).isStrike() && isNextFrame) {
+            Frame nextFrame = frames.get(i + 1);
+            bonusFromStrike = nextFrame.getFrameSum();
+
+            boolean isSecondNextFrame = i + 2 < frames.size();
+            if (nextFrame.isStrikeInFirstRoll() && isSecondNextFrame) {
+                Frame secondNextFrame = frames.get(i + 2);
+                bonusFromStrike += secondNextFrame.getRoll1();
+            }
+        }
+        return bonusFromStrike;
     }
 }

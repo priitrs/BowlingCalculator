@@ -52,4 +52,31 @@ public class BowlingCalculatorTest {
         assertEquals(270, calculator.calculate());
     }
 
+    @Test
+    public void getBonusIfFrameIsSpare() {
+        calculator.addRoll(6);
+        calculator.addRoll(4);
+        calculator.addRoll(1);
+        calculator.addRoll(3);
+
+        assertEquals(1, calculator.getBonusIfFrameIsSpare(0));
+    }
+
+    @Test
+    public void getBonusIfFrameIsStrike() {
+        calculator.addRoll(10);
+        calculator.addRoll(2);
+        calculator.addRoll(3);
+
+        assertEquals(5, calculator.getBonusIfFrameIsStrike(0));
+    }
+
+    @Test
+    public void getBonusIfStrike_firstBonusRollIsFrameIsStrike() {
+        calculator.addRoll(10);
+        calculator.addRoll(10);
+        calculator.addRoll(10);
+
+        assertEquals(20, calculator.getBonusIfFrameIsStrike(0));
+    }
 }

@@ -6,6 +6,11 @@ public class Frame {
         this.roll1 = roll1;
     }
 
+    public Frame(int roll1, int roll2) {
+        this.roll1 = roll1;
+        this.roll2 = roll2;
+    }
+
     public boolean isStrike() {
         return roll1 == 10 || roll2 == 10;
     }
