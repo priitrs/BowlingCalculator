@@ -101,6 +101,7 @@ public class BowlingCalculatorTest {
         calculator.addRoll(5);
 
         assertEquals("| 3 4 | X - | 3 1 | 3 / | 3 4 | 0 / | X - | X - | 1 2 | 4 5 |", calculator.getDisplayableResults());
+        calculator.calculateScore();
         calculator.print();
     }
 

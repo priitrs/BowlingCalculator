@@ -4,6 +4,7 @@ import java.util.List;
 public class BowlingCalculator {
 
     private final List<Frame> frames = new ArrayList<>();
+    private final int[] scores = new int[10];
 
     public void addRoll(int pins) {
         if (isFirstRollInFrame()) {
@@ -18,6 +19,7 @@ public class BowlingCalculator {
         int result = 0;
         for (int i = 0; i < frames.size() && i <= 9; i++) {
             result += getSingleFrameScore(i);
+            scores[i] = result;
         }
         return result;
     }
@@ -44,12 +46,11 @@ public class BowlingCalculator {
     String getDisplayableScores() {
         StringBuilder result = new StringBuilder("|");
         for (int i = 0; i < frames.size(); i++) {
-            int singleFrameScore = getSingleFrameScore(i);
-            if (singleFrameScore < 10) result.append("  %s  |".formatted(singleFrameScore));
-            else if (singleFrameScore > 99) result.append(" %s |".formatted(singleFrameScore));
-            else result.append("  %s |".formatted(singleFrameScore));
+            int scoreAfterFrame = scores[i];
+            if (scoreAfterFrame < 10) result.append("  %s  |".formatted(scoreAfterFrame));
+            else if (scoreAfterFrame > 99) result.append(" %s |".formatted(scoreAfterFrame));
+            else result.append("  %s |".formatted(scoreAfterFrame));
         }
-        result.append(" TOTAL: %s".formatted(calculateScore()));
         return result.toString();
     }
 
