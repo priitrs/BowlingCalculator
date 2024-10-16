@@ -31,7 +31,7 @@ public class BowlingCalculator {
         StringBuilder result = new StringBuilder("|");
         for (Frame frame : frames) {
             if (frame.isStrike()) {
-                result.append(frame.isStrikeInFirstRoll() ? " X - |" : " 0 X |");
+                result.append(" X - |");
             } else if (frame.isSpare()) {
                 result.append(" %s / |".formatted(frame.getRoll1()));
             } else {
@@ -70,11 +70,12 @@ public class BowlingCalculator {
             bonusFromStrike = nextFrame.getFrameSum();
 
             boolean isSecondNextFrame = i + 2 < frames.size();
-            if (nextFrame.isStrikeInFirstRoll() && isSecondNextFrame) {
+            if (nextFrame.isStrike() && isSecondNextFrame) {
                 Frame secondNextFrame = frames.get(i + 2);
                 bonusFromStrike += secondNextFrame.getRoll1();
             }
-        }        return bonusFromStrike;
+        }
+        return bonusFromStrike;
     }
 
     private boolean isFirstRollInFrame() {

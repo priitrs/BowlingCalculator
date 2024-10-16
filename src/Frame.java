@@ -1,10 +1,10 @@
 public class Frame {
-    private int roll1;
+    private final int roll1;
     private int roll2 = -1;
 
     public Frame(int roll1) {
         this.roll1 = roll1;
-        if (roll1 == 10) {
+        if (isStrike()) {
             this.roll2 = 0;
         }
     }
@@ -15,10 +15,6 @@ public class Frame {
     }
 
     public boolean isStrike() {
-        return roll1 == 10 || roll2 == 10;
-    }
-
-    public boolean isStrikeInFirstRoll() {
         return roll1 == 10;
     }
 

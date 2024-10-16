@@ -6,20 +6,11 @@ class FrameTest {
 
     @Test
     void isStrike() {
-        Frame strikeOnFirstRoll = new Frame(10);
-        Frame strikeOnSecondRoll = new Frame(0, 10);
+        Frame frame1 = new Frame(10);
+        Frame frame2 = new Frame(0, 10);
 
-        assertTrue(strikeOnFirstRoll.isStrike());
-        assertTrue(strikeOnSecondRoll.isStrike());
-    }
-
-    @Test
-    void isStrikeInFirstRoll() {
-        Frame strikeOnFirstRoll = new Frame(10);
-        Frame strikeOnSecondRoll = new Frame(0, 10);
-
-        assertTrue(strikeOnFirstRoll.isStrikeInFirstRoll());
-        assertFalse(strikeOnSecondRoll.isStrikeInFirstRoll());
+        assertTrue(frame1.isStrike());
+        assertFalse(frame2.isStrike());
     }
 
     @Test

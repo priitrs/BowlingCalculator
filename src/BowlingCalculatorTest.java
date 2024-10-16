@@ -100,7 +100,7 @@ public class BowlingCalculatorTest {
         calculator.addRoll(4);
         calculator.addRoll(5);
 
-        assertEquals("| 3 4 | X - | 3 1 | 3 / | 3 4 | 0 X | X - | X - | 1 2 | 4 5 |", calculator.getDisplayableResults());
+        assertEquals("| 3 4 | X - | 3 1 | 3 / | 3 4 | 0 / | X - | X - | 1 2 | 4 5 |", calculator.getDisplayableResults());
         calculator.print();
     }
 
@@ -125,14 +125,6 @@ public class BowlingCalculatorTest {
         calculator.addRoll(10);
 
         assertEquals("| X - |", calculator.getDisplayableResults());
-    }
-
-    @Test
-    public void getDisplayableResults_strikeWithSecondRoll() {
-        calculator.addRoll(0);
-        calculator.addRoll(10);
-
-        assertEquals("| 0 X |", calculator.getDisplayableResults());
     }
 
 }
