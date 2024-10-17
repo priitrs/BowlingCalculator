@@ -28,4 +28,19 @@ class FrameTest {
 
         assertEquals(10, frame.getFrameSum());
     }
+
+    @Test
+    void tooString() {
+        assertEquals("3 5", new Frame(3, 5).toString());
+    }
+
+    @Test
+    void spareToString() {
+        assertEquals("3 /", new Frame(3, 7).toString());
+    }
+
+    @Test
+    void strikeToString() {
+        assertEquals("X -", new Frame(10).toString());
+    }
 }

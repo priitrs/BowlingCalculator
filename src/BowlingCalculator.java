@@ -30,9 +30,7 @@ public class BowlingCalculator {
     }
 
     String getDisplayableFrameResults() {
-        return frames.stream()
-                .reduce(new StringBuilder("|"), StringBuilder::append, StringBuilder::append)
-                .toString();
+        return "| " + String.join(" | ", frames.stream().map(Frame::toString).toList()) + " |";
     }
 
     String getDisplayableScores() {

@@ -44,8 +44,8 @@ public class Frame {
 
     @Override
     public String toString() {
-        if (isStrike()) return " X - |";
-        if (isSpare()) return " %s / |".formatted(getRoll1());
-        return " %s %s |".formatted(getRoll1(), getRoll2());
+        if (isStrike()) return "X -";
+        if (isSpare()) return "%s /".formatted(getRoll1());
+        return "%s %s".formatted(getRoll1(), getRoll2());
     }
 }
