@@ -138,28 +138,4 @@ public class BowlingCalculatorTest {
 
         assertEquals(expected, calculator.getPrintableResults());
     }
-
-    @Test
-    public void getDisplayableFrameResults_normalRolls() {
-        calculator.addRoll(3);
-        calculator.addRoll(4);
-
-        assertEquals("| 3 4 |", calculator.getDisplayableFrameResults());
-    }
-
-    @Test
-    public void getDisplayableFrameResults_spare() {
-        calculator.addRoll(3);
-        calculator.addRoll(7);
-
-        assertEquals("| 3 / |", calculator.getDisplayableFrameResults());
-    }
-
-    @Test
-    public void getDisplayableFrameResults_strikeWithFirstRoll() {
-        calculator.addRoll(10);
-
-        assertEquals("| X - |", calculator.getDisplayableFrameResults());
-    }
-
 }

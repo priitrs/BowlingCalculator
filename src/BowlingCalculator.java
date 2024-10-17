@@ -32,21 +32,6 @@ public class BowlingCalculator {
                 %s""".formatted(getDisplayableFrameResults(), getDisplayableScores()));
     }
 
-    String getDisplayableFrameResults() {
-        return "| " + String.join(" | ", frames.stream().map(Frame::toString).toList()) + " |";
-    }
-
-    String getDisplayableScores() {
-        StringBuilder result = new StringBuilder("|");
-        for (int i = 0; i < frames.size() && i <= 9; i++) {
-            int totalScoreAfterFrame = scores[i];
-            if (totalScoreAfterFrame < 10) result.append("  %s  |".formatted(totalScoreAfterFrame));
-            else if (totalScoreAfterFrame > 99) result.append(" %s |".formatted(totalScoreAfterFrame));
-            else result.append("  %s |".formatted(totalScoreAfterFrame));
-        }
-        return result.toString();
-    }
-
     int getBonusIfFrameIsSpare(int i) {
         if (frames.get(i).isSpare() && isFramePresent(i, 1)) {
             return frames.get(i + 1).getRoll1();
@@ -65,6 +50,21 @@ public class BowlingCalculator {
             }
         }
         return bonusFromStrike;
+    }
+
+    private String getDisplayableFrameResults() {
+        return "| " + String.join(" | ", frames.stream().map(Frame::toString).toList()) + " |";
+    }
+
+    private String getDisplayableScores() {
+        StringBuilder result = new StringBuilder("|");
+        for (int i = 0; i < frames.size() && i <= 9; i++) {
+            int totalScoreAfterFrame = scores[i];
+            if (totalScoreAfterFrame < 10) result.append("  %s  |".formatted(totalScoreAfterFrame));
+            else if (totalScoreAfterFrame > 99) result.append(" %s |".formatted(totalScoreAfterFrame));
+            else result.append("  %s |".formatted(totalScoreAfterFrame));
+        }
+        return result.toString();
     }
 
     private boolean isFramePresent(int frameIndex, int step) {
