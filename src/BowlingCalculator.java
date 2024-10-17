@@ -21,8 +21,7 @@ public class BowlingCalculator {
 
     public void calculateScore() {
         for (int i = 0; i < frames.size() && i <= 9; i++) {
-            if (i == 0) scores[i] = getSingleFrameScore(i);
-            else scores[i] = scores[i - 1] + getSingleFrameScore(i);
+            scores[i] = (i == 0) ? getCurrentFrameScore(i) : scores[i - 1] + getCurrentFrameScore(i);
         }
     }
 
@@ -71,7 +70,7 @@ public class BowlingCalculator {
         return frames.isEmpty() || frames.getLast().isStrike() || frames.getLast().isFramePassed();
     }
 
-    private int getSingleFrameScore(int i) {
+    private int getCurrentFrameScore(int i) {
         return frames.get(i).getFrameSum() + getBonusIfFrameIsSpare(i) + getBonusIfFrameIsStrike(i);
     }
 }
