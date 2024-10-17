@@ -32,21 +32,19 @@ public class BowlingCalculator {
                 %s""".formatted(getDisplayableFrameResults(), getDisplayableScores()));
     }
 
-    int getBonusIfFrameIsSpare(int i) {
-        if (frames.get(i).isSpare() && isFramePresent(i, 1)) {
-            return frames.get(i + 1).getRoll1();
+    int getBonusIfFrameIsSpare(int index) {
+        if (frames.get(index).isSpare() && isFramePresent(index, 1)) {
+            return frames.get(index + 1).getRoll1();
         }
         return 0;
     }
 
-    int getBonusIfFrameIsStrike(int frameIndex) {
-        if (frames.get(frameIndex).isStrike() && isFramePresent(frameIndex, 1)) {
-            Frame nextFrame = frames.get(frameIndex + 1);
-            return (nextFrame.isStrike() && isFramePresent(frameIndex, 2))
-                    ? nextFrame.getRoll1() + frames.get(frameIndex + 2).getRoll1()
-                    : nextFrame.getFrameSum();
-
-        }
+    int getBonusIfFrameIsStrike(int index) {
+        if (frames.get(index).isStrike() && isFramePresent(index, 1)) {
+            Frame nextFrame = frames.get(index + 1);
+            return (nextFrame.isStrike() && isFramePresent(index, 2))
+                    ? nextFrame.getRoll1() + frames.get(index + 2).getRoll1()
+                    : nextFrame.getFrameSum();        }
         return 0;
     }
 
