@@ -35,11 +35,11 @@ public class BowlingCalculator {
 
     String getDisplayableScores() {
         StringBuilder result = new StringBuilder("|");
-        for (int i = 0; i < frames.size(); i++) {
-            int scoreAfterFrame = scores[i];
-            if (scoreAfterFrame < 10) result.append("  %s  |".formatted(scoreAfterFrame));
-            else if (scoreAfterFrame > 99) result.append(" %s |".formatted(scoreAfterFrame));
-            else result.append("  %s |".formatted(scoreAfterFrame));
+        for (int i = 0; i < frames.size() && i <= 9; i++) {
+            int totalScoreAfterFrame = scores[i];
+            if (totalScoreAfterFrame < 10) result.append("  %s  |".formatted(totalScoreAfterFrame));
+            else if (totalScoreAfterFrame > 99) result.append(" %s |".formatted(totalScoreAfterFrame));
+            else result.append("  %s |".formatted(totalScoreAfterFrame));
         }
         return result.toString();
     }
