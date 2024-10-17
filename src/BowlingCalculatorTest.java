@@ -15,6 +15,7 @@ public class BowlingCalculatorTest {
 
         assertEquals(15, calculator.calculateScore());
     }
+
     @Test
     public void calculate_Score_spare() {
         calculator.addRoll(6);
@@ -117,10 +118,13 @@ public class BowlingCalculatorTest {
         calculator.addRoll(10);
         calculator.addRoll(10);
         calculator.addRoll(10);
-
-//        assertEquals("| 3 4 | X - | 3 1 | 3 / | 3 4 | 0 / | X - | X - | 1 2 | 4 5 |", calculator.getDisplayableFrameResults());
         calculator.calculateScore();
-        calculator.printResults();
+
+        String expected = """
+                | 3 4 | X - | 3 1 | 3 / | 3 4 | 0 / | X - | X - | 1 2 | X - | X - | X - |
+                |  7  |  21 |  25 |  38 |  45 |  65 |  86 |  99 | 102 | 132 |""";
+
+        assertEquals(expected, calculator.getPrintableResults());
     }
 
     @Test

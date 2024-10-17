@@ -24,9 +24,10 @@ public class BowlingCalculator {
         return result;
     }
 
-    public void printResults() {
-        System.out.println(getDisplayableFrameResults());
-        System.out.println(getDisplayableScores());
+    public String getPrintableResults() {
+        return ("""
+                %s
+                %s""".formatted(getDisplayableFrameResults(), getDisplayableScores()));
     }
 
     String getDisplayableFrameResults() {
