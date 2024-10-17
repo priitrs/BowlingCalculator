@@ -40,16 +40,14 @@ public class BowlingCalculator {
     }
 
     int getBonusIfFrameIsStrike(int frameIndex) {
-        int bonusFromStrike = 0;
         if (frames.get(frameIndex).isStrike() && isFramePresent(frameIndex, 1)) {
             Frame nextFrame = frames.get(frameIndex + 1);
-            bonusFromStrike = nextFrame.getFrameSum();
+            return (nextFrame.isStrike() && isFramePresent(frameIndex, 2))
+                    ? nextFrame.getRoll1() + frames.get(frameIndex + 2).getRoll1()
+                    : nextFrame.getFrameSum();
 
-            if (nextFrame.isStrike() && isFramePresent(frameIndex, 2)) {
-                bonusFromStrike += frames.get(frameIndex + 2).getRoll1();
-            }
         }
-        return bonusFromStrike;
+        return 0;
     }
 
     private String getDisplayableFrameResults() {
