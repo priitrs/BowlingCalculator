@@ -63,21 +63,38 @@ public class BowlingCalculatorTest {
     }
 
     @Test
+    public void getBonusIfFrameIsSpare_bonusRollIsMissing() {
+        calculator.addRoll(6);
+        calculator.addRoll(4);
+
+        assertEquals(0, calculator.getBonusIfFrameIsSpare(0));
+    }
+
+    @Test
     public void getBonusIfFrameIsStrike() {
         calculator.addRoll(10);
         calculator.addRoll(2);
         calculator.addRoll(3);
+        calculator.addRoll(5);
 
         assertEquals(5, calculator.getBonusIfFrameIsStrike(0));
     }
 
     @Test
-    public void getBonusIfStrike_firstBonusRollIsStrike() {
+    public void getBonusIfFrameIsStrike_nextFrameIsStrike() {
         calculator.addRoll(10);
         calculator.addRoll(10);
         calculator.addRoll(10);
 
         assertEquals(20, calculator.getBonusIfFrameIsStrike(0));
+    }
+
+    @Test
+    public void getBonusIfFrameIsStrike_nextFrameIsStrikeButSecondNextFrameIsMissing() {
+        calculator.addRoll(10);
+        calculator.addRoll(10);
+
+        assertEquals(10, calculator.getBonusIfFrameIsStrike(0));
     }
 
     @Test

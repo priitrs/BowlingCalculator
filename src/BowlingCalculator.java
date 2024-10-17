@@ -45,28 +45,27 @@ public class BowlingCalculator {
     }
 
     int getBonusIfFrameIsSpare(int i) {
-        boolean isNextFrame = i + 1 < frames.size();
-        if (frames.get(i).isSpare() && isNextFrame) {
-            Frame nextFrame = frames.get(i + 1);
-            return nextFrame.getRoll1();
+        if (frames.get(i).isSpare() && isFramePresent(i, 1)) {
+            return frames.get(i + 1).getRoll1();
         }
         return 0;
     }
 
-    int getBonusIfFrameIsStrike(int i) {
-        boolean isNextFrame = i + 1 < frames.size();
+    int getBonusIfFrameIsStrike(int frameIndex) {
         int bonusFromStrike = 0;
-        if (frames.get(i).isStrike() && isNextFrame) {
-            Frame nextFrame = frames.get(i + 1);
+        if (frames.get(frameIndex).isStrike() && isFramePresent(frameIndex, 1)) {
+            Frame nextFrame = frames.get(frameIndex + 1);
             bonusFromStrike = nextFrame.getFrameSum();
 
-            boolean isSecondNextFrame = i + 2 < frames.size();
-            if (nextFrame.isStrike() && isSecondNextFrame) {
-                Frame secondNextFrame = frames.get(i + 2);
-                bonusFromStrike += secondNextFrame.getRoll1();
+            if (nextFrame.isStrike() && isFramePresent(frameIndex, 2)) {
+                bonusFromStrike += frames.get(frameIndex + 2).getRoll1();
             }
         }
         return bonusFromStrike;
+    }
+
+    private boolean isFramePresent(int frameIndex, int step) {
+        return frameIndex + step < frames.size();
     }
 
     private boolean isFirstRollInFrame() {
