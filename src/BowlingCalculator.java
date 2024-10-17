@@ -6,6 +6,10 @@ public class BowlingCalculator {
     private final List<Frame> frames = new ArrayList<>();
     private final int[] scores = new int[10];
 
+    public int[] getScores() {
+        return scores;
+    }
+
     public void addRoll(int pins) {
         if (isFirstRollInFrame()) {
             Frame currentFrame = new Frame(pins);
@@ -15,13 +19,11 @@ public class BowlingCalculator {
         }
     }
 
-    public int calculateScore() {
-        int result = 0;
+    public void calculateScore() {
         for (int i = 0; i < frames.size() && i <= 9; i++) {
-            result += getSingleFrameScore(i);
-            scores[i] = result;
+            if (i == 0) scores[i] = getSingleFrameScore(i);
+            else scores[i] = scores[i - 1] + getSingleFrameScore(i);
         }
-        return result;
     }
 
     public String getPrintableResults() {

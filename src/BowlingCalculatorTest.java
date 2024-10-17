@@ -12,8 +12,10 @@ public class BowlingCalculatorTest {
         calculator.addRoll(4);
         calculator.addRoll(1);
         calculator.addRoll(7);
+        calculator.calculateScore();
 
-        assertEquals(15, calculator.calculateScore());
+        int[] expected = {7, 15, 0, 0, 0, 0, 0, 0, 0, 0};
+        assertArrayEquals(expected, calculator.getScores());
     }
 
     @Test
@@ -22,8 +24,10 @@ public class BowlingCalculatorTest {
         calculator.addRoll(4);
         calculator.addRoll(1);
         calculator.addRoll(3);
+        calculator.calculateScore();
 
-        assertEquals(15, calculator.calculateScore());
+        int[] expected = {11, 15, 0, 0, 0, 0, 0, 0, 0, 0};
+        assertArrayEquals(expected, calculator.getScores());
     }
 
     @Test
@@ -31,8 +35,10 @@ public class BowlingCalculatorTest {
         calculator.addRoll(10);
         calculator.addRoll(1);
         calculator.addRoll(1);
+        calculator.calculateScore();
 
-        assertEquals(14, calculator.calculateScore());
+        int[] expected = {12, 14, 0, 0, 0, 0, 0, 0, 0, 0};
+        assertArrayEquals(expected, calculator.getScores());
     }
 
     @Test
@@ -41,7 +47,10 @@ public class BowlingCalculatorTest {
             calculator.addRoll(10);
         }
 
-        assertEquals(300, calculator.calculateScore());
+        calculator.calculateScore();
+
+        int[] expected = {30, 60, 90, 120, 150, 180, 210, 240, 270, 300};
+        assertArrayEquals(expected, calculator.getScores());
     }
 
     @Test
@@ -50,7 +59,10 @@ public class BowlingCalculatorTest {
             calculator.addRoll(10);
         }
 
-        assertEquals(270, calculator.calculateScore());
+        calculator.calculateScore();
+
+        int[] expected = {30, 60, 90, 120, 150, 180, 210, 240, 260, 270};
+        assertArrayEquals(expected, calculator.getScores());
     }
 
     @Test
