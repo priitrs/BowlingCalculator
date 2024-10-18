@@ -123,7 +123,7 @@ public class BowlingCalculatorTest {
 
         String expected = """
                 | 3 4 | X - | 3 1 | 3 / | 3 4 | 0 / | X - | X - | 1 2 | X - | X - | X - |
-                |  7  |  21 |  25 |  38 |  45 |  65 |  86 |  99 | 102 | 132 |""";
+                | 7   | 21  | 25  | 38  | 45  | 65  | 86  | 99  | 102 | 132 |""";
 
         assertEquals(expected, calculator.getPrintableResults());
     }

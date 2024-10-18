@@ -55,9 +55,7 @@ public class BowlingCalculator {
     }
 
     private String getFormattedFrameScore(int totalScoreAfterFrame) {
-        if (totalScoreAfterFrame < 10) return "  %s  |".formatted(totalScoreAfterFrame);
-        else if (totalScoreAfterFrame > 99) return " %s |".formatted(totalScoreAfterFrame);
-        else return "  %s |".formatted(totalScoreAfterFrame);
+        return " " + String.format("%-4s", totalScoreAfterFrame) + "|";
     }
 
     private boolean isFramePresent(int frameIndex, int step) {
