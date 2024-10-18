@@ -4,11 +4,6 @@ import java.util.List;
 public class BowlingCalculator {
 
     private final List<Frame> frames = new ArrayList<>();
-    private final int[] scores = new int[10];
-
-    public int[] getScores() {
-        return scores;
-    }
 
     public void addRoll(int pins) {
         if (isFirstRollInFrame()) {
@@ -16,12 +11,6 @@ public class BowlingCalculator {
             frames.add(currentFrame);
         } else {
             frames.getLast().setRoll2(pins);
-        }
-    }
-
-    public void calculateScore() {
-        for (int i = 0; i < frames.size() && i <= 9; i++) {
-            scores[i] = (i == 0) ? getCurrentFrameScore(i) : scores[i - 1] + getCurrentFrameScore(i);
         }
     }
 
@@ -53,13 +42,22 @@ public class BowlingCalculator {
 
     private String getDisplayableScores() {
         StringBuilder result = new StringBuilder("|");
+        int totalScore = 0;
         for (int i = 0; i < frames.size() && i <= 9; i++) {
-            int totalScoreAfterFrame = scores[i];
-            if (totalScoreAfterFrame < 10) result.append("  %s  |".formatted(totalScoreAfterFrame));
-            else if (totalScoreAfterFrame > 99) result.append(" %s |".formatted(totalScoreAfterFrame));
-            else result.append("  %s |".formatted(totalScoreAfterFrame));
+            totalScore = getTotalScoreAfterFrame(i, totalScore);
+            result.append(getFormattedFrameScore(totalScore));
         }
         return result.toString();
+    }
+
+    private int getTotalScoreAfterFrame(int i, int total) {
+        return  total + getCurrentFrameScore(i);
+    }
+
+    private String getFormattedFrameScore(int totalScoreAfterFrame) {
+        if (totalScoreAfterFrame < 10) return "  %s  |".formatted(totalScoreAfterFrame);
+        else if (totalScoreAfterFrame > 99) return " %s |".formatted(totalScoreAfterFrame);
+        else return "  %s |".formatted(totalScoreAfterFrame);
     }
 
     private boolean isFramePresent(int frameIndex, int step) {
