@@ -1,9 +1,16 @@
+import java.util.Objects;
+
 public class LastFrame extends Frame {
     private int roll3 = -1;
 
     public LastFrame(int roll1) {
         super();
         setRoll1(roll1);
+    }
+
+    public LastFrame(int roll1, int roll2, int roll3) {
+        super(roll1, roll2);
+        this.roll3 = roll3;
     }
 
     @Override
@@ -35,6 +42,19 @@ public class LastFrame extends Frame {
         sb.append(isSpare() ? "/" : getRoll2() == 10 ? "X" : getRoll2());
         sb.append(isBonusRoll() ? getRoll3() == 10 ? "X" : getRoll3() : "");
         return String.format("%-3s", sb);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LastFrame lastFrame = (LastFrame) o;
+        return getRoll1() == lastFrame.getRoll1() && getRoll2() == lastFrame.getRoll2() && roll3 == lastFrame.roll3;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(roll3);
     }
 
     public int getRoll3() {
