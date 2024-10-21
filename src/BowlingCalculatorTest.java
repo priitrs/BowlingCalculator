@@ -13,7 +13,11 @@ public class BowlingCalculatorTest {
         calculator.addRoll(1);
         calculator.addRoll(7);
 
-        int[] expected = {7, 15, 0, 0, 0, 0, 0, 0, 0, 0};
+        String expected = """
+                | 3 4 | 1 7 |
+                | 7   | 15  |""";
+
+        assertEquals(expected, calculator.getResults());
     }
 
     @Test
@@ -23,7 +27,11 @@ public class BowlingCalculatorTest {
         calculator.addRoll(1);
         calculator.addRoll(3);
 
-        int[] expected = {11, 15, 0, 0, 0, 0, 0, 0, 0, 0};
+        String expected = """
+                | 6 / | 1 3 |
+                | 11  | 15  |""";
+
+        assertEquals(expected, calculator.getResults());
     }
 
     @Test
@@ -32,7 +40,11 @@ public class BowlingCalculatorTest {
         calculator.addRoll(1);
         calculator.addRoll(1);
 
-        int[] expected = {12, 14, 0, 0, 0, 0, 0, 0, 0, 0};
+        String expected = """
+                | X - | 1 1 |
+                | 12  | 14  |""";
+
+        assertEquals(expected, calculator.getResults());
     }
 
     @Test
@@ -42,17 +54,11 @@ public class BowlingCalculatorTest {
         }
 
 
-        int[] expected = {30, 60, 90, 120, 150, 180, 210, 240, 270, 300};
-    }
+        String expected = """
+                | X - | X - | X - | X - | X - | X - | X - | X - | X - | XXX |
+                | 30  | 60  | 90  | 120 | 150 | 180 | 210 | 240 | 270 | 300 |""";
 
-    @Test
-    public void calculate_Score_strikesWithoutBonusRolls() {
-        for (int i = 0; i < 10; i++) {
-            calculator.addRoll(10);
-        }
-
-
-        int[] expected = {30, 60, 90, 120, 150, 180, 210, 240, 260, 270};
+        assertEquals(expected, calculator.getResults());
     }
 
     @Test
@@ -101,7 +107,7 @@ public class BowlingCalculatorTest {
     }
 
     @Test
-    public void getFrameResults() {
+    public void getFrameResults_strikeInEnd() {
         calculator.addRoll(3);
         calculator.addRoll(4);
         calculator.addRoll(10);
@@ -122,10 +128,40 @@ public class BowlingCalculatorTest {
         calculator.addRoll(10);
 
         String expected = """
-                | 3 4 | X - | 3 1 | 3 / | 3 4 | 0 / | X - | X - | 1 2 | X - | X - | X - |
+                | 3 4 | X - | 3 1 | 3 / | 3 4 | 0 / | X - | X - | 1 2 | XXX |
                 | 7   | 21  | 25  | 38  | 45  | 65  | 86  | 99  | 102 | 132 |""";
 
         assertEquals(expected, calculator.getResults());
-        System.out.println(calculator.getResults());
+    }
+
+    @Test
+    public void getFrameResults_spareInEnd() {
+        for (int i = 0; i < 18; i++) {
+            calculator.addRoll(0);
+        }
+        calculator.addRoll(6);
+        calculator.addRoll(4);
+        calculator.addRoll(7);
+
+        String expected = """
+                | 0 0 | 0 0 | 0 0 | 0 0 | 0 0 | 0 0 | 0 0 | 0 0 | 0 0 | 6/7 |
+                | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 17  |""";
+
+        assertEquals(expected, calculator.getResults());
+    }
+
+    @Test
+    public void getFrameResults_normalEnd() {
+        for (int i = 0; i < 18; i++) {
+            calculator.addRoll(0);
+        }
+        calculator.addRoll(6);
+        calculator.addRoll(2);
+
+        String expected = """
+                | 0 0 | 0 0 | 0 0 | 0 0 | 0 0 | 0 0 | 0 0 | 0 0 | 0 0 | 62  |
+                | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 8   |""";
+
+        assertEquals(expected, calculator.getResults());
     }
 }

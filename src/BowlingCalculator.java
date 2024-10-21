@@ -7,10 +7,10 @@ public class BowlingCalculator {
 
     public void addRoll(int pins) {
         if (isFirstRollInFrame()) {
-            Frame currentFrame = new Frame(pins);
+            var currentFrame = isLastFrame() ? new LastFrame(pins) : new Frame(pins);
             frames.add(currentFrame);
         } else {
-            frames.getLast().setRoll2(pins);
+            frames.getLast().addRoll(pins);
         }
     }
 
@@ -32,7 +32,7 @@ public class BowlingCalculator {
             Frame nextFrame = frames.get(index + 1);
             return (nextFrame.isStrike() && isFramePresent(index, 2))
                     ? nextFrame.getRoll1() + frames.get(index + 2).getRoll1()
-                    : nextFrame.getFrameSum();
+                    : nextFrame.getRoll1() + nextFrame.getRoll2();
         }
         return 0;
     }
@@ -64,10 +64,14 @@ public class BowlingCalculator {
     }
 
     private boolean isFirstRollInFrame() {
-        return frames.isEmpty() || frames.getLast().isStrike() || frames.getLast().isFramePassed();
+        return frames.isEmpty() || frames.getLast().isFramePassed();
     }
 
     private int getCurrentFrameScore(int i) {
         return frames.get(i).getFrameSum() + getBonusIfFrameIsSpare(i) + getBonusIfFrameIsStrike(i);
+    }
+
+    private boolean isLastFrame() {
+        return frames.size() == 9 && frames.getLast().isFramePassed();
     }
 }

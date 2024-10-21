@@ -1,6 +1,9 @@
 public class Frame {
-    private final int roll1;
+    private int roll1;
     private int roll2 = -1;
+
+    public Frame() {
+    }
 
     public Frame(int roll1) {
         this.roll1 = roll1;
@@ -15,15 +18,15 @@ public class Frame {
     }
 
     public boolean isStrike() {
-        return roll1 == 10;
+        return getRoll1() == 10;
     }
 
     public boolean isSpare() {
-        return getFrameSum() == 10 && !isStrike();
+        return getRoll1() + getRoll2() == 10 && !isStrike();
     }
 
     public int getFrameSum() {
-        return roll1 + roll2;
+        return getRoll1() + getRoll2();
     }
 
     public boolean isFramePassed() {
@@ -38,8 +41,16 @@ public class Frame {
         return roll2;
     }
 
+    public void setRoll1(int roll1) {
+        this.roll1 = roll1;
+    }
+
     public void setRoll2(int roll2) {
         this.roll2 = roll2;
+    }
+
+    public void addRoll(int roll) {
+        this.roll2 = roll;
     }
 
     @Override
