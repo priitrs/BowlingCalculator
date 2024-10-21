@@ -7,7 +7,7 @@ public class BowlingCalculatorTest {
     BowlingCalculator calculator = new BowlingCalculator();
 
     @Test
-    public void calculate_Score_standard() {
+    public void getResults_standard() {
         calculator.addRoll(3);
         calculator.addRoll(4);
         calculator.addRoll(1);
@@ -21,7 +21,7 @@ public class BowlingCalculatorTest {
     }
 
     @Test
-    public void calculate_Score_spare() {
+    public void getResults_spare() {
         calculator.addRoll(6);
         calculator.addRoll(4);
         calculator.addRoll(1);
@@ -35,7 +35,7 @@ public class BowlingCalculatorTest {
     }
 
     @Test
-    public void calculate_Score_strike() {
+    public void getResults_strike() {
         calculator.addRoll(10);
         calculator.addRoll(1);
         calculator.addRoll(1);
@@ -48,12 +48,11 @@ public class BowlingCalculatorTest {
     }
 
     @Test
-    public void calculate_Score_strikesWithBonusRolls() {
+    public void getResults_strikesWithBonusRolls() {
         for (int i = 0; i < 12; i++) {
             calculator.addRoll(10);
         }
-
-
+        
         String expected = """
                 | X - | X - | X - | X - | X - | X - | X - | X - | X - | XXX |
                 | 30  | 60  | 90  | 120 | 150 | 180 | 210 | 240 | 270 | 300 |""";
@@ -107,7 +106,7 @@ public class BowlingCalculatorTest {
     }
 
     @Test
-    public void getFrameResults_strikeInEnd() {
+    public void getResults_strikeInEnd() {
         calculator.addRoll(3);
         calculator.addRoll(4);
         calculator.addRoll(10);
@@ -135,7 +134,7 @@ public class BowlingCalculatorTest {
     }
 
     @Test
-    public void getFrameResults_spareInEnd() {
+    public void getResults_spareInEnd() {
         for (int i = 0; i < 18; i++) {
             calculator.addRoll(0);
         }
@@ -151,7 +150,7 @@ public class BowlingCalculatorTest {
     }
 
     @Test
-    public void getFrameResults_normalEnd() {
+    public void getResults_normalEnd() {
         for (int i = 0; i < 18; i++) {
             calculator.addRoll(0);
         }
