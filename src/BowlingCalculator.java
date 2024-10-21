@@ -14,10 +14,10 @@ public class BowlingCalculator {
         }
     }
 
-    public String getPrintableResults() {
+    public String getResults() {
         return ("""
                 %s
-                %s""".formatted(getDisplayableFrameResults(), getDisplayableScores()));
+                %s""".formatted(getFrameResults(), getScores()));
     }
 
     int getBonusIfFrameIsSpare(int index) {
@@ -32,15 +32,16 @@ public class BowlingCalculator {
             Frame nextFrame = frames.get(index + 1);
             return (nextFrame.isStrike() && isFramePresent(index, 2))
                     ? nextFrame.getRoll1() + frames.get(index + 2).getRoll1()
-                    : nextFrame.getFrameSum();        }
+                    : nextFrame.getFrameSum();
+        }
         return 0;
     }
 
-    private String getDisplayableFrameResults() {
+    private String getFrameResults() {
         return "| " + String.join(" | ", frames.stream().map(Frame::toString).toList()) + " |";
     }
 
-    private String getDisplayableScores() {
+    private String getScores() {
         StringBuilder result = new StringBuilder("|");
         int totalScore = 0;
         for (int i = 0; i < frames.size() && i <= 9; i++) {
